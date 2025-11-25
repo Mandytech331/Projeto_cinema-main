@@ -14,3 +14,6 @@ Or python -m pip install flask
 After installing Flask, run the program in VSCode terminal using the command line:
 python script.py
 *It's important to remember to be in the same directory as the script to run this command line.
+
+
+Esta Adcionado uma Pasta .ZIP contendo ja os arquivos compactados. 
