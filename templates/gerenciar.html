@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gerenciar.css') }}">
+</head>
+<body class="gerenciar-page">
+    <div class="container">
+        <div class="header-gerenciar">
+            <div>
+                <h1>Gerenciar Clientes</h1>
+                <p class="subtitle">Consulte, edite ou remova dados de clientes</p>
+            </div>
+            <a href="/funcao" class="btn btn-secondary">← Voltar</a>
+        </div>
+
+        <!-- Barra de Pesquisa e Filtros -->
+        <div class="search-bar">
+            <div class="search-group">
+                <input type="text" id="busca-cpf" class="input-search" placeholder="🔍 Buscar por CPF...">
+                <input type="text" id="busca-nome" class="input-search" placeholder="🔍 Buscar por Nome...">
+            </div>
+            <div class="filter-group">
+                <select id="filtro-status" class="input-search">
+                    <option value="">Todos os Status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="bloqueado">Bloqueado</option>
+                </select>
+                <button class="btn btn-primary" onclick="aplicarFiltros()">🔍 Filtrar</button>
+            </div>
+        </div>
+
+        <!-- Tabela de Clientes -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3>📋 Lista de Clientes</h3>
+                <span class="total-clientes">Total: 42 clientes</span>
+            </div>
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>CPF</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Reservas</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>123.456.789-10</td>
+                            <td>João Silva</td>
+                            <td>joao@email.com</td>
+                            <td>(11) 98765-4321</td>
+                            <td>5</td>
+                            <td><span class="status-chip status-active">Ativo</span></td>
+                            <td class="acoes-td">
+                                <button class="btn-icon" title="Editar" onclick="editarCliente('123.456.789-10')">✏️</button>
+                                <button class="btn-icon danger" title="Bloquear" onclick="bloquearCliente('123.456.789-10')">🚫</button>
+                                <button class="btn-icon danger" title="Remover" onclick="removerCliente('123.456.789-10')">🗑️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>987.654.321-09</td>
+                            <td>Maria Santos</td>
+                            <td>maria@email.com</td>
+                            <td>(11) 97654-3210</td>
+                            <td>3</td>
+                            <td><span class="status-chip status-active">Ativo</span></td>
+                            <td class="acoes-td">
+                                <button class="btn-icon" title="Editar" onclick="editarCliente('987.654.321-09')">✏️</button>
+                                <button class="btn-icon danger" title="Bloquear" onclick="bloquearCliente('987.654.321-09')">🚫</button>
+                                <button class="btn-icon danger" title="Remover" onclick="removerCliente('987.654.321-09')">🗑️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>456.789.123-11</td>
+                            <td>Pedro Costa</td>
+                            <td>pedro@email.com</td>
+                            <td>(11) 96543-2109</td>
+                            <td>8</td>
+                            <td><span class="status-chip status-blocked">Bloqueado</span></td>
+                            <td class="acoes-td">
+                                <button class="btn-icon" title="Editar" onclick="editarCliente('456.789.123-11')">✏️</button>
+                                <button class="btn-icon" title="Desbloquear" onclick="desbloquearCliente('456.789.123-11')">✅</button>
+                                <button class="btn-icon danger" title="Remover" onclick="removerCliente('456.789.123-11')">🗑️</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginação -->
+            <div class="pagination">
+                <button class="page-btn">← Anterior</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Próximo →</button>
+            </div>
+        </div>
+
+        <!-- Seção de Informações -->
+        <div class="info-section">
+            <div class="info-card">
+                <h4>📊 Estatísticas</h4>
+                <ul>
+                    <li><strong>42</strong> clientes registrados</li>
+                    <li><strong>38</strong> clientes ativos</li>
+                    <li><strong>4</strong> clientes bloqueados</li>
+                    <li><strong>156</strong> reservas total</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h4>⚙️ Ações Rápidas</h4>
+                <button class="btn btn-primary btn-small" onclick="exportarDados()">📥 Exportar Dados</button>
+                <button class="btn btn-secondary btn-small" onclick="importarDados()">📤 Importar Dados</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="modalCliente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Cliente</h2>
+                <button class="modal-close" onclick="fecharModalCliente()">&times;</button>
+            </div>
+            <form class="form-cliente" onsubmit="salvarCliente(event)">
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" readonly class="input">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome *</label>
+                        <input type="text" id="nome" name="nome" required class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required class="input">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" class="input">
+                            <option value="ativo">Ativo</option>
+                            <option value="bloqueado">Bloqueado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">💾 Salvar</button>
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalCliente()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function editarCliente(cpf) {
+            document.getElementById('cpf').value = cpf;
+            document.getElementById('modalCliente').style.display = 'flex';
+        }
+
+        function fecharModalCliente() {
+            document.getElementById('modalCliente').style.display = 'none';
+        }
+
+        function salvarCliente(event) {
+            event.preventDefault();
+            alert('Cliente atualizado! (Implementar no backend)');
+            fecharModalCliente();
+        }
+
+        function bloquearCliente(cpf) {
+            if (confirm('Tem certeza que deseja bloquear este cliente?')) {
+                alert('Cliente bloqueado!');
+            }
+        }
+
+        function desbloquearCliente(cpf) {
+            if (confirm('Tem certeza que deseja desbloquear este cliente?')) {
+                alert('Cliente desbloqueado!');
+            }
+        }
+
+        function removerCliente(cpf) {
+            if (confirm('Tem certeza que deseja remover este cliente? Esta ação não pode ser desfeita.')) {
+                alert('Cliente removido!');
+            }
+        }
+
+        function aplicarFiltros() {
+            alert('Filtros aplicados!');
+        }
+
+        function exportarDados() {
+            alert('Exportando dados em CSV...');
+        }
+
+        function importarDados() {
+            alert('Selecione um arquivo CSV para importar...');
+        }
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalCliente');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

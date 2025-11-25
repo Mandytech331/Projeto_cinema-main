@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+    <title>Suas Reservas</title>
+</head>
+<body>
+    <h1>Minhas Reservas</h1>
+
+    {% for r in reservas %}
+        <p>
+            <strong>{{ r[3] }}</strong> <br>
+            Data: {{ r[0] }} <br>
+            Horário: {{ r[1] }} <br>
+            Assento: {{ r[2] }}
+        </p>
+    {% endfor %}
+
+</body>
+</html>

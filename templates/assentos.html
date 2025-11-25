@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecione seu assento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/assentos.css') }}">
+</head>
+<body>
+    <h1>Escolha seus assentos</h1>
+
+<form action="/reservar" method="POST">
+    <input type="hidden" name="filme_id" value="{{ filme.id }}">
+    <input type="hidden" name="data" value="{{ data }}">
+    <input type="hidden" name="horario" value="{{ horario }}">
+    <input type="hidden" name="preco" value="{{ preco }}">
+    
+    <input type="hidden" name="assentos" id="assentosSelecionados">
+
+<main class="assentos-page">
+<div class="grid" role="grid" aria-label="Mapa de assentos">
+    {% for numero in range(1, 101) %}
+        <div 
+            id="seat-{{ numero }}"
+            class="assento {% if numero in ocupados %}ocupado{% else %}livre{% endif %}"
+            onclick="toggleAssento('{{ numero }}')"
+            tabindex="{% if numero in ocupados %}-1{% else %}0{% endif %}"
+            onkeydown="if(event.key==='Enter' || event.key===' ' || event.key==='Spacebar'){ event.preventDefault(); toggleAssento('{{ numero }}'); }"
+            role="button"
+            aria-disabled="{% if numero in ocupados %}true{% else %}false{% endif %}"
+        >
+            {{ numero }}
+        </div>
+    {% endfor %}
+</div>
+<div class="tela">TELA</div>
+
+    <h2>Sessão: {{ data }} às {{ horario }}</h2>
+    <h3>Dia: {{ dia_semana }}</h3>
+
+    <h2>Preço por assento: R$ {{ preco }}</h2>
+    <p id="total">Total: R$ 0,00</p>
+
+    <button type="submit">Reservar</button>
+</form>
+</main>
+
+
+<script>
+    const preço = "{{ preco }}";
+    const totalLabel = document.getElementById("total");
+    const inputAssentos = document.getElementById("assentosSelecionados");
+
+    let selecionados = new Set();
+
+    function toggleAssento(num) {
+        const seat = document.getElementById("seat-" + num);
+
+        if (seat.classList.contains("ocupado")) return;
+
+        seat.classList.toggle("selecionado");
+
+        if (selecionados.has(num)) {
+            selecionados.delete(num);
+        } else {
+            selecionados.add(num);
+        }
+
+        const total = selecionados.size * preço;
+        totalLabel.textContent = "Total: R$ " + total.toFixed(2);
+
+        inputAssentos.value = Array.from(selecionados).join(",");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/regis.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <form action="/registrar" method="POST">
+            <h1>Faça Seu Cadastro!</h1>
+            <input type="text" name="cpf" id="bar" placeholder="Digite seu CPF (111.222.333-45)"> </br></br>
+            <input type="text" name="name" id="bar" placeholder="Digite seu nome completo"> </br></br>
+            <input type="text" name="user" id="bar" placeholder="Crie seu nome de usuário"> </br></br>
+            <input type="password" name="pass" id="bar" placeholder="Crie sua senha"></br></br>
+            {% with messages = get_flashed_messages() %}
+			    {% if messages %}
+                    {{ messages[0] }}
+                {% endif %}
+			{% endwith %}
+            <button type="submit" id="btn">Cadastrar</button> </br>
+            <a href="/">Já Possui Cadastro?</a>
+        </form>
+    </div>
+</body>
+</html>

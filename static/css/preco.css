@@ -1,0 +1,233 @@
+/* CSS para página de Preços */
+:root{
+  --bg: #0a0a0f;
+  --fg: #ffffff;
+  --muted: #cccccc;
+  --accent: #a259ff;
+  --accent-strong: #8b3ff6;
+  --accent-light: #c88aff;
+}
+
+body.preco-page{
+  background: linear-gradient(135deg, #0a0a0f 0%, #12061a 50%, #0a0a0f 100%);
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: "Poppins", sans-serif;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-preco{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 20px;
+  animation: fadeInDown 0.6s ease;
+}
+
+.header-preco h1{
+  color: var(--accent);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 0 15px rgba(162,89,255,0.6);
+}
+
+.header-preco .subtitle{
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+.preco-content{
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(162,89,255,0.15);
+  border-radius: 16px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 20px rgba(162,89,255,0.1);
+}
+
+.precos-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.preco-card{
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(162,89,255,0.2);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: slideUp 0.6s ease;
+}
+
+.preco-card:hover{
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+  border-color: rgba(162,89,255,0.5);
+  box-shadow: 0 12px 30px rgba(162,89,255,0.2);
+  transform: translateY(-6px);
+}
+
+.preco-card h3{
+  color: var(--accent-light);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.form-group{
+  margin-bottom: 16px;
+}
+
+.form-group label{
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input-group{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.currency{
+  position: absolute;
+  left: 12px;
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+.input{
+  width: 100%;
+  padding: 10px 10px 10px 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(162,89,255,0.2);
+  background: rgba(255,255,255,0.03);
+  color: var(--fg);
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input:focus{
+  outline: none;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(162,89,255,0.5);
+  box-shadow: 0 0 12px rgba(162,89,255,0.2);
+}
+
+.form-actions{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn{
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: var(--fg);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 8px 20px rgba(162,89,255,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(162,89,255,0.4);
+}
+
+.btn.btn-secondary{
+  background: transparent;
+  color: var(--muted);
+  border: 2px solid rgba(162,89,255,0.2);
+}
+
+.btn.btn-secondary:hover{
+  border-color: rgba(162,89,255,0.5);
+  color: var(--accent-light);
+}
+
+.btn.btn-lg{
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
+.preco-info{
+  background: rgba(162,89,255,0.1);
+  border: 1px solid rgba(162,89,255,0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.preco-info h4{
+  color: var(--accent-light);
+  margin-top: 0;
+}
+
+.preco-info ul{
+  margin: 0;
+  padding-left: 20px;
+}
+
+.preco-info li{
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+@keyframes fadeInDown{
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp{
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 1024px){
+  .precos-grid{ grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .preco-content{ padding: 30px; }
+}
+
+@media (max-width: 768px){
+  .header-preco{ flex-direction: column; }
+  .header-preco h1{ font-size: 1.8rem; }
+  .preco-content{ padding: 20px; }
+  .precos-grid{ grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .preco-card{ padding: 16px; }
+  .form-actions{ gap: 8px; }
+  .btn.btn-lg{ padding: 10px 16px; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px){
+  body.preco-page{ padding: 20px 10px; }
+  .header-preco h1{ font-size: 1.4rem; }
+  .precos-grid{ grid-template-columns: 1fr; }
+  .preco-content{ padding: 16px; }
+  .btn.btn-lg{ width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Carrinho</title>
+
+    <!-- Google Fonts (melhor usar link em head para performance) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Link correto para o CSS -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/comprar.css') }}">
+
+
+</head>
+<body>
+    <header>
+        <h1>{{ filme.titulo }}</h1>
+    </header>
+
+    <img class="poster" src="{{ url_for('static', filename='img/' ~ filme.arquivo) }}" alt="{{ filme.titulo }}">
+
+    <div class="movie-info">
+        <p>Ano: {{ filme.ano }}</p>
+        <p>{{ filme.sinopse }}</p>
+    </div>
+
+    <h2>Escolha o dia e horário para assistir o filme</h2>
+
+    {% for d in datas %}
+        <div class="dia-card">
+            <h3>{{ d.data }} — {{ d.dia_semana }}</h3>
+            <p>Preço: R$ {{ d.preco }}</p>
+
+            <div class="horarios">
+            {% for h in horarios %}
+                <form method="GET" action="/assentos">
+                    <input type="hidden" name="filme_id" value="{{ filme.id }}">
+                    <input type="hidden" name="data" value="{{ d.data }}">
+                    <input type="hidden" name="dia_semana" value="{{ d.dia_semana }}">
+                    <input type="hidden" name="preco" value="{{ d.preco }}">
+                    <input type="hidden" name="horario" value="{{ h }}">
+
+                    <button class="horario-btn">{{ h }}</button>
+                </form>
+            {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/funcao.css') }}">
+</head>
+<body class="funcao-page">
+    <div class="container">
+        <div class="admin-header">
+            <div class="header-content">
+                <h1>Painel Administrativo</h1>
+                <p class="subtitle">Selecione uma função para continuar</p>
+            </div>
+            <a href="/" class="btn-logout">Sair</a>
+        </div>
+
+        <div class="funcoes-grid">
+            <!-- Card: Gerenciar Preços -->
+            <div class="funcao-card card-preco">
+                <div class="card-icon">💰</div>
+                <h3>Tabela de Preços</h3>
+                <p>Altere os preços dos ingressos por dia da semana</p>
+                <button onclick="window.location.href='/preco'" class="btn-primary">Acessar</button>
+            </div>
+
+            <!-- Card: Gerenciar Clientes -->
+            <div class="funcao-card card-clientes">
+                <div class="card-icon">👥</div>
+                <h3>Gerenciar Clientes</h3>
+                <p>Consulte, edite ou remova dados de clientes</p>
+                <button onclick="window.location.href='/gerenciar'" class="btn-primary">Acessar</button>
+            </div>
+
+            <!-- Card: Relatórios -->
+            <div class="funcao-card card-relatorios">
+                <div class="card-icon">📊</div>
+                <h3>Relatórios</h3>
+                <p>Visualize estatísticas de vendas e ocupação</p>
+                <button onclick="window.location.href='/relatorios'" class="btn-primary">Acessar</button>
+            </div>
+
+            <!-- Card: Gerenciar Filmes -->
+            <div class="funcao-card card-filmes">
+                <div class="card-icon">🎬</div>
+                <h3>Gerenciar Filmes</h3>
+                <p>Adicione, edite ou remova filmes do sistema</p>
+                <button onclick="window.location.href='/filmes'" class="btn-primary">Acessar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

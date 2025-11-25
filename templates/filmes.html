@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Filmes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/filmes.css') }}">
+</head>
+<body class="filmes-page">
+    <div class="container">
+        <div class="header-filmes">
+            <div>
+                <h1>Gerenciar Filmes</h1>
+                <p class="subtitle">Adicione, edite ou remova filmes do sistema</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="abrirModalNovoFilme()">➕ Novo Filme</button>
+                <a href="/funcao" class="btn btn-secondary">← Voltar</a>
+            </div>
+        </div>
+
+        <!-- Filtro e Busca -->
+        <div class="search-card">
+            <input type="text" id="busca-filme" class="input-search" placeholder="🔍 Buscar filme por título...">
+            <select class="input-search" id="ordem-filmes" onchange="ordenarFilmes(this.value)">
+                <option value="titulo">Ordenar por Título</option>
+                <option value="ano">Ordenar por Ano</option>
+                <option value="recente">Mais Recentes</option>
+            </select>
+        </div>
+
+        <!-- Grid de Filmes -->
+        <div class="filmes-grid">
+            <div class="filme-card">
+                <div class="filme-poster">
+                    <img src="{{ url_for('static', filename='img/clube.jpg') }}" alt="Clube da Luta">
+                    <div class="filme-overlay">
+                        <button class="btn btn-sm" onclick="editarFilme(0)">✏️ Editar</button>
+                        <button class="btn btn-sm btn-danger" onclick="removerFilme(0)">🗑️ Remover</button>
+                    </div>
+                </div>
+                <div class="filme-info">
+                    <h3>Clube da Luta</h3>
+                    <p class="ano">1999</p>
+                    <p class="sinopse">Um homem deprimido que sofre de insônia conhece um estranho vendedor chamado Tyler Durden...</p>
+                </div>
+            </div>
+
+            <div class="filme-card">
+                <div class="filme-poster">
+                    <img src="{{ url_for('static', filename='img/interestelar.jpg') }}" alt="Interestelar">
+                    <div class="filme-overlay">
+                        <button class="btn btn-sm" onclick="editarFilme(1)">✏️ Editar</button>
+                        <button class="btn btn-sm btn-danger" onclick="removerFilme(1)">🗑️ Remover</button>
+                    </div>
+                </div>
+                <div class="filme-info">
+                    <h3>Interestelar</h3>
+                    <p class="ano">2014</p>
+                    <p class="sinopse">As reservas naturais da Terra estão chegando ao fim e um grupo de astronautas recebe a missão...</p>
+                </div>
+            </div>
+
+            <div class="filme-card">
+                <div class="filme-poster">
+                    <img src="{{ url_for('static', filename='img/karate.jpg') }}" alt="Karatê Kid 5">
+                    <div class="filme-overlay">
+                        <button class="btn btn-sm" onclick="editarFilme(2)">✏️ Editar</button>
+                        <button class="btn btn-sm btn-danger" onclick="removerFilme(2)">🗑️ Remover</button>
+                    </div>
+                </div>
+                <div class="filme-info">
+                    <h3>Karatê Kid 5</h3>
+                    <p class="ano">1994</p>
+                    <p class="sinopse">Um garoto de 12 anos chamado Dre Parker se muda para a China com a mãe...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Novo/Editar Filme -->
+    <div id="modalFilme" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitulo">Novo Filme</h2>
+                <button class="modal-close" onclick="fecharModalFilme()">&times;</button>
+            </div>
+            <form class="form-filme" onsubmit="salvarFilme(event)">
+                <div class="form-group">
+                    <label for="titulo">Título *</label>
+                    <input type="text" id="titulo" name="titulo" required class="input">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ano">Ano *</label>
+                        <input type="number" id="ano" name="ano" min="1900" max="2099" required class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="arquivo">Arquivo de Imagem</label>
+                        <input type="text" id="arquivo" name="arquivo" placeholder="filme.jpg" class="input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sinopse">Sinopse *</label>
+                    <textarea id="sinopse" name="sinopse" rows="5" required class="input"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">💾 Salvar</button>
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalFilme()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function abrirModalNovoFilme() {
+            document.getElementById('modalTitulo').textContent = 'Novo Filme';
+            document.getElementById('titulo').value = '';
+            document.getElementById('ano').value = '';
+            document.getElementById('arquivo').value = '';
+            document.getElementById('sinopse').value = '';
+            document.getElementById('modalFilme').style.display = 'flex';
+        }
+
+        function fecharModalFilme() {
+            document.getElementById('modalFilme').style.display = 'none';
+        }
+
+        function editarFilme(id) {
+            document.getElementById('modalTitulo').textContent = 'Editar Filme';
+            document.getElementById('modalFilme').style.display = 'flex';
+            // Aqui seria feito carregamento dos dados do filme
+        }
+
+        function removerFilme(id) {
+            if (confirm('Tem certeza que deseja remover este filme?')) {
+                alert('Filme removido! (Implementar no backend)');
+            }
+        }
+
+        function salvarFilme(event) {
+            event.preventDefault();
+            alert('Filme salvo! (Implementar no backend)');
+            fecharModalFilme();
+        }
+
+        function ordenarFilmes(ordem) {
+            console.log('Ordenar por: ' + ordem);
+        }
+
+        document.getElementById('busca-filme').addEventListener('keyup', function(e) {
+            console.log('Buscando: ' + this.value);
+        });
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalFilme');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

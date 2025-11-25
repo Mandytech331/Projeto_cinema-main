@@ -1,0 +1,369 @@
+/* CSS para página de Gerenciar Filmes */
+:root{
+  --bg: #0a0a0f;
+  --fg: #ffffff;
+  --muted: #cccccc;
+  --accent: #a259ff;
+  --accent-strong: #8b3ff6;
+  --accent-light: #c88aff;
+}
+
+body.filmes-page{
+  background: linear-gradient(135deg, #0a0a0f 0%, #12061a 50%, #0a0a0f 100%);
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: "Poppins", sans-serif;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.container{
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.header-filmes{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 20px;
+  animation: fadeInDown 0.6s ease;
+}
+
+.header-filmes h1{
+  color: var(--accent);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 0 15px rgba(162,89,255,0.6);
+}
+
+.header-filmes .subtitle{
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+.header-actions{
+  display: flex;
+  gap: 12px;
+}
+
+.btn{
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: var(--fg);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 8px 20px rgba(162,89,255,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(162,89,255,0.4);
+}
+
+.btn.btn-secondary{
+  background: transparent;
+  color: var(--muted);
+  border: 2px solid rgba(162,89,255,0.2);
+}
+
+.btn.btn-secondary:hover{
+  border-color: rgba(162,89,255,0.5);
+  color: var(--accent-light);
+}
+
+.btn.btn-sm{
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.btn.btn-danger{
+  background: linear-gradient(135deg, #f44336 0%, #e53935 100%);
+}
+
+.btn.btn-danger:hover{
+  box-shadow: 0 8px 20px rgba(244,67,54,0.3);
+}
+
+/* Barra de Busca e Filtros */
+.search-card{
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.input-search{
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(162,89,255,0.2);
+  background: rgba(255,255,255,0.03);
+  color: var(--fg);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  flex: 1;
+  min-width: 200px;
+  transition: all 0.3s ease;
+}
+
+.input-search:focus{
+  outline: none;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(162,89,255,0.5);
+  box-shadow: 0 0 12px rgba(162,89,255,0.2);
+}
+
+/* Grid de Filmes */
+.filmes-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.filme-card{
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(162,89,255,0.15);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: slideUp 0.6s ease;
+}
+
+.filme-card:hover{
+  transform: translateY(-8px);
+  border-color: rgba(162,89,255,0.5);
+  box-shadow: 0 16px 50px rgba(162,89,255,0.2);
+}
+
+.filme-poster{
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.5);
+}
+
+.filme-poster img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.filme-card:hover .filme-poster img{
+  transform: scale(1.05);
+}
+
+.filme-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.filme-card:hover .filme-overlay{
+  opacity: 1;
+}
+
+.filme-overlay .btn{
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.filme-info{
+  padding: 20px;
+}
+
+.filme-info h3{
+  color: var(--accent-light);
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+}
+
+.filme-info .ano{
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0 0 12px 0;
+}
+
+.filme-info .sinopse{
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Modal */
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content{
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(162,89,255,0.2);
+  border-radius: 14px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.modal-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modal-header h2{
+  color: var(--accent-light);
+  margin: 0;
+}
+
+.modal-close{
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 28px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover{
+  color: var(--accent-light);
+}
+
+/* Formulário */
+.form-filme{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label{
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input, textarea{
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(162,89,255,0.2);
+  background: rgba(255,255,255,0.03);
+  color: var(--fg);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.input:focus, textarea:focus{
+  outline: none;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(162,89,255,0.5);
+  box-shadow: 0 0 12px rgba(162,89,255,0.2);
+}
+
+textarea{
+  resize: vertical;
+}
+
+.form-row{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.form-actions{
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.form-actions .btn{
+  padding: 10px 20px;
+}
+
+@keyframes fadeInDown{
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp{
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn{
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsividade */
+@media (max-width: 1024px){
+  .filmes-grid{ grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+}
+
+@media (max-width: 768px){
+  .header-filmes{ flex-direction: column; }
+  .header-filmes h1{ font-size: 1.8rem; }
+  .header-actions{ flex-direction: column; width: 100%; }
+  .header-actions .btn{ width: 100%; }
+  .filmes-grid{ grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .search-card{ flex-direction: column; }
+  .input-search{ min-width: 100%; }
+}
+
+@media (max-width: 480px){
+  body.filmes-page{ padding: 20px 10px; }
+  .header-filmes h1{ font-size: 1.4rem; }
+  .filmes-grid{ grid-template-columns: 1fr; }
+  .modal-content{ width: 95%; padding: 20px; }
+  .form-row{ grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

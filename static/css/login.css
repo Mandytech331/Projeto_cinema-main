@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top left, #001020, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+form {
+    background: rgba(20, 20, 30, 0.9);
+    padding: 50px 60px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4), 0 0 50px rgba(0, 100, 255, 0.3);
+    text-align: center;
+    width: 380px;
+    animation: fadeIn 1.2s ease forwards;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+form h1 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #ff002b;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #ff002b, 0 0 20px #0040ff;
+}
+
+#bar {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#bar::placeholder {
+    color: #aaa;
+}
+
+#bar:focus {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px #ff002b, 0 0 20px #0040ff;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #ff002b, #0040ff);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ff002b, 0 0 30px #0040ff;
+}
+
+p {
+    margin-top: 20px;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+a {
+    color: #ff002b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #0040ff;
+    text-shadow: 0 0 10px #0040ff;
+}
+
+/* Luz ambiente */
+form::before {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255,0,43,0.3), transparent 70%);
+    top: -50px;
+    left: -50px;
+    filter: blur(100px);
+    z-index: -1;
+}

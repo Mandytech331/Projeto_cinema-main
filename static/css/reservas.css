@@ -1,0 +1,59 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    background: #0a0a0f;
+    color: #ffffff;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== TÍTULO ===== */
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #a259ff;
+    text-shadow: 0 0 12px rgba(162, 89, 255, 0.6);
+}
+
+/* ===== CARD DE RESERVA ===== */
+.reserva-card {
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(162, 89, 255, 0.4);
+    border-left: 4px solid #a259ff;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 18px rgba(162, 89, 255, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* animação hover agradável */
+.reserva-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(162, 89, 255, 0.3);
+}
+
+/* Título do filme */
+.reserva-card strong {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+/* texto interno */
+.reserva-card p {
+    margin: 4px 0;
+    font-size: 0.95rem;
+    color: #cccccc;
+}

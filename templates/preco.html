@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Preços</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/preco.css') }}">
+</head>
+<body class="preco-page">
+    <div class="container">
+        <div class="header-preco">
+            <div>
+                <h1>Tabela de Preços</h1>
+                <p class="subtitle">Altere os preços dos ingressos por dia da semana</p>
+            </div>
+            <a href="/funcao" class="btn btn-secondary">← Voltar</a>
+        </div>
+
+        <div class="preco-content">
+            <form method="POST" action="/preco" class="form-precos">
+                <div class="precos-grid">
+                    <!-- Segunda-feira -->
+                    <div class="preco-card">
+                        <h3>Segunda-feira</h3>
+                        <div class="form-group">
+                            <label for="segunda">Preço (R$)</label>
+                            <div class="input-group">
+                                <span class="currency">R$</span>
+                                <input type="number" id="segunda" name="segunda" step="0.01" min="0" placeholder="00.00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terça-feira -->
+                    <div class="preco-card">
+                        <h3>Terça-feira</h3>
+                        <div class="form-group">
+                            <label for="terca">Preço (R$)</label>
+                            <div class="input-group">
+                                <span class="currency">R$</span>
+                                <input type="number" id="terca" name="terca" step="0.01" min="0" placeholder="00.00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quarta-feira -->
+                    <div class="preco-card">
+                        <h3>Quarta-feira</h3>
+                        <div class="form-group">
+                            <label for="quarta">Preço (R$)</label>
+                            <div class="input-group">
+                                <span class="currency">R$</span>
+                                <input type="number" id="quarta" name="quarta" step="0.01" min="0" placeholder="00.00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quinta-feira -->
+                    <div class="preco-card">
+                        <h3>Quinta-feira</h3>
+                        <div class="form-group">
+                            <label for="quinta">Preço (R$)</label>
+                            <div class="input-group">
+                                <span class="currency">R$</span>
+                                <input type="number" id="quinta" name="quinta" step="0.01" min="0" placeholder="00.00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sexta-feira -->
+                    <div class="preco-card">
+                        <h3>Sexta-feira</h3>
+                        <div class="form-group">
+                            <label for="sexta">Preço (R$)</label>
+                            <div class="input-group">
+                                <span class="currency">R$</span>
+                                <input type="number" id="sexta" name="sexta" step="0.01" min="0" placeholder="00.00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sábado -->
+                    <div class="preco-card">
+                        <h3>Sábado</h3>
+                        <div class="form-group">
+                            <label for="sabado">Preço (R$)</label>
+                            <div class="input-group">
+                                <span class="currency">R$</span>
+                                <input type="number" id="sabado" name="sabado" step="0.01" min="0" placeholder="00.00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Domingo -->
+                    <div class="preco-card">
+                        <h3>Domingo</h3>
+                        <div class="form-group">
+                            <label for="domingo">Preço (R$)</label>
+                            <div class="input-group">
+                                <span class="currency">R$</span>
+                                <input type="number" id="domingo" name="domingo" step="0.01" min="0" placeholder="00.00" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg">💾 Salvar Alterações</button>
+                    <button type="reset" class="btn btn-secondary btn-lg">🔄 Restaurar</button>
+                </div>
+            </form>
+
+            <div class="preco-info">
+                <h4>ℹ️ Informações</h4>
+                <ul>
+                    <li>Use preços diferentes para dias de semana e fim de semana</li>
+                    <li>Os preços serão automaticamente aplicados nas reservas futuras</li>
+                    <li>Formato: Use ponto (.) como separador decimal</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

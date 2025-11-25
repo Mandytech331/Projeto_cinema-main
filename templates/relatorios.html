@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/relatorios.css') }}">
+</head>
+<body class="relatorios-page">
+    <div class="container">
+        <div class="header-relatorios">
+            <div>
+                <h1>Relatórios e Estatísticas</h1>
+                <p class="subtitle">Visualize dados de vendas e ocupação</p>
+            </div>
+            <a href="/funcao" class="btn btn-secondary">← Voltar</a>
+        </div>
+
+        <div class="relatorios-content">
+            <!-- Filtros -->
+            <div class="filtros-card">
+                <h3>🔍 Filtros</h3>
+                <div class="filtros-grid">
+                    <div class="form-group">
+                        <label for="data-inicio">Data Inicial</label>
+                        <input type="date" id="data-inicio" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="data-fim">Data Final</label>
+                        <input type="date" id="data-fim" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="filme-select">Filme</label>
+                        <select id="filme-select" class="input">
+                            <option value="">Todos os filmes</option>
+                        </select>
+                    </div>
+                    <div class="form-actions-mini">
+                        <button class="btn btn-primary" onclick="aplicarFiltros()">🔍 Filtrar</button>
+                        <button class="btn btn-secondary" onclick="limparFiltros()">↻ Limpar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards de Métricas -->
+            <div class="metricas-grid">
+                <div class="metrica-card">
+                    <div class="metrica-icon">💵</div>
+                    <div class="metrica-info">
+                        <h4>Receita Total</h4>
+                        <p class="metrica-valor">R$ 15.850,00</p>
+                        <span class="metrica-change positive">↑ 12% vs mês anterior</span>
+                    </div>
+                </div>
+
+                <div class="metrica-card">
+                    <div class="metrica-icon">🎫</div>
+                    <div class="metrica-info">
+                        <h4>Ingressos Vendidos</h4>
+                        <p class="metrica-valor">458</p>
+                        <span class="metrica-change positive">↑ 8% vs mês anterior</span>
+                    </div>
+                </div>
+
+                <div class="metrica-card">
+                    <div class="metrica-icon">👥</div>
+                    <div class="metrica-info">
+                        <h4>Clientes Ativos</h4>
+                        <p class="metrica-valor">127</p>
+                        <span class="metrica-change positive">↑ 5% vs mês anterior</span>
+                    </div>
+                </div>
+
+                <div class="metrica-card">
+                    <div class="metrica-icon">📊</div>
+                    <div class="metrica-info">
+                        <h4>Taxa de Ocupação</h4>
+                        <p class="metrica-valor">78%</p>
+                        <span class="metrica-change positive">↑ 3% vs mês anterior</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Filmes -->
+            <div class="tabela-card">
+                <h3>🎬 Desempenho por Filme</h3>
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Filme</th>
+                                <th>Ingressos</th>
+                                <th>Receita</th>
+                                <th>Taxa Ocupação</th>
+                                <th>Sessões</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Clube da Luta</td>
+                                <td>156</td>
+                                <td>R$ 5.850,00</td>
+                                <td><span class="badge-success">89%</span></td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Interestelar</td>
+                                <td>142</td>
+                                <td>R$ 5.325,00</td>
+                                <td><span class="badge-success">76%</span></td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>Karatê Kid 5</td>
+                                <td>98</td>
+                                <td>R$ 3.675,00</td>
+                                <td><span class="badge-warning">62%</span></td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>Família Addams</td>
+                                <td>62</td>
+                                <td>R$ 2.325,00</td>
+                                <td><span class="badge-danger">45%</span></td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Período com Maior Venda -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <h4>📅 Período com Maior Venda</h4>
+                    <p><strong>Sábado e Domingo</strong></p>
+                    <span>65% do faturamento semanal</span>
+                </div>
+                <div class="info-card">
+                    <h4>🕐 Horário de Pico</h4>
+                    <p><strong>19:00 às 22:00</strong></p>
+                    <span>Melhor horário para vendas</span>
+                </div>
+                <div class="info-card">
+                    <h4>🎬 Filme Destaque</h4>
+                    <p><strong>Clube da Luta</strong></p>
+                    <span>Maior taxa de ocupação</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function aplicarFiltros() {
+            alert('Filtros aplicados! (Implementar no backend)');
+        }
+        
+        function limparFiltros() {
+            document.getElementById('data-inicio').value = '';
+            document.getElementById('data-fim').value = '';
+            document.getElementById('filme-select').value = '';
+        }
+    </script>
+</body>
+</html>
